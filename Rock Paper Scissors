@@ -3,6 +3,8 @@ import emoji
 import random
 
 class rock:
+    You=0
+    ComputerScore=0
     def __init__(self,root):
         self.root=root
         self.root.geometry("720x720")
@@ -12,34 +14,61 @@ class rock:
         lab1.pack(fill=X)
         f1=LabelFrame(root,text="Lets Fight",font=("Arial",20,"bold"))
         f1.place(x=0,y=60,relwidth=1)
+        
         def game(event):
+            
             computer=random.choice(['rock','paper',"Scissors"])
             if(event.widget==rockbtn and computer=="rock"):
                 ans.config(text="Match is Draw")
                 emoji.config(text="     \U0001F928	")
+                scr.config(text=f"You :{rock.You}\nComputer :{rock.ComputerScore}")
+
             elif(event.widget==rockbtn and computer=="paper"):
                 ans.config(text="You loose \nYou Choose Rock\tComputer Choose Paper")
+                rock.ComputerScore=rock.ComputerScore+1
                 emoji.config(text="     \U0001F614	")
+                scr.config(text=f"You :{rock.You}\nComputer :{rock.ComputerScore}")
+
             elif(event.widget==rockbtn and computer=="Scissors"):
                 ans.config(text="You Win \nYou Choose Rock\tComputer Choose Scissor")
+                rock.You=rock.You+1
                 emoji.config(text="     \U0001F929	")
+                scr.config(text=f"You :{rock.You}\nComputer :{rock.ComputerScore}")
+
             elif(event.widget==paperbtn and computer=="paper"):
                 ans.config(text="Match Draw")
                 emoji.config(text="     \U0001F928	")
+                scr.config(text=f"You :{rock.You}\nComputer :{rock.ComputerScore}")
+
             elif(event.widget==paperbtn and computer=="rock"):
                 ans.config(text="You Win \nYou Choose Paper\tComputer Choose Rock")
+                rock.You=rock.You+1
                 emoji.config(text="     \U0001F929	")
+                scr.config(text=f"You :{rock.You}\nComputer :{rock.ComputerScore}")
+
             elif(event.widget==paperbtn and computer=="Scissors"):
                 ans.config(text="You Loose \nYou Choose Paper\tComputer Choose Scissor")
+                rock.ComputerScore=rock.ComputerScore+1
                 emoji.config(text="     \U0001F614	")
+                scr.config(text=f"You :{rock.You}\nComputer :{rock.ComputerScore}")
+
             elif(event.widget==srbtn and computer=="Scissors"):
                 ans.config(text="Match Draw")
+                emoji.config(text="     \U0001F928	")
+                scr.config(text=f"You :{rock.You}\nComputer :{rock.ComputerScore}")
+
             elif(event.widget==srbtn and computer=="paper"):
                 ans.config(text="You Win \nYou Choose Scissor\tComputer Choose Paper")
+                rock.You=rock.You+1
                 emoji.config(text="     \U0001F929	")
+                scr.config(text=f"You :{rock.You}\nComputer :{rock.ComputerScore}")
+
             elif(event.widget==srbtn and computer=="Rock"):
                 ans.config(text="You Loose \nYou Choose Scissor\tComputer Choose Rock")
                 emoji.config(text="     \U0001F614	")
+                rock.ComputerScore=rock.ComputerScore+1
+                scr.config(text=f"You :{rock.You}\nComputer :{rock.ComputerScore}")
+
                 
         rockbtn=Button(f1,text="Rock",bg="#ff0066",font=("Big Space",30),relief="sunken")
         rockbtn.bind('<ButtonPress>',game)
@@ -57,6 +86,9 @@ class rock:
         ans.place(x=360,y=360,anchor=CENTER)
         emoji=Label(root,text="     \U0001F600	",bg="#9966ff",font=("Big Space",25),relief="solid")
         emoji.place(x=360,y=450,anchor=CENTER)
+
+        scr=Label(root,text="Score",bg="#9966ff",font=("Big Space",25),relief="solid")
+        scr.place(x=360,y=650,anchor=CENTER)
         
 
 root=Tk()
