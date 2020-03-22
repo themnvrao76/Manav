@@ -1,0 +1,64 @@
+from tkinter import *
+import emoji
+import random
+
+class rock:
+    def __init__(self,root):
+        self.root=root
+        self.root.geometry("720x720")
+        self.root.title("Rock Paper Scissors")
+        self.root.maxsize(720,720)
+        lab1=Label(root,text="Rock Paper Scissors ",bg="#cc66ff",font=("Big Space",30),fg="black",relief="solid")
+        lab1.pack(fill=X)
+        f1=LabelFrame(root,text="Lets Fight",font=("Arial",20,"bold"))
+        f1.place(x=0,y=60,relwidth=1)
+        def game(event):
+            computer=random.choice(['rock','paper',"Scissors"])
+            if(event.widget==rockbtn and computer=="rock"):
+                ans.config(text="Match is Draw")
+                emoji.config(text="     \U0001F928	")
+            elif(event.widget==rockbtn and computer=="paper"):
+                ans.config(text="You loose \nYou Choose Rock\tComputer Choose Paper")
+                emoji.config(text="     \U0001F614	")
+            elif(event.widget==rockbtn and computer=="Scissors"):
+                ans.config(text="You Win \nYou Choose Rock\tComputer Choose Scissor")
+                emoji.config(text="     \U0001F929	")
+            elif(event.widget==paperbtn and computer=="paper"):
+                ans.config(text="Match Draw")
+                emoji.config(text="     \U0001F928	")
+            elif(event.widget==paperbtn and computer=="rock"):
+                ans.config(text="You Win \nYou Choose Paper\tComputer Choose Rock")
+                emoji.config(text="     \U0001F929	")
+            elif(event.widget==paperbtn and computer=="Scissors"):
+                ans.config(text="You Loose \nYou Choose Paper\tComputer Choose Scissor")
+                emoji.config(text="     \U0001F614	")
+            elif(event.widget==srbtn and computer=="Scissors"):
+                ans.config(text="Match Draw")
+            elif(event.widget==srbtn and computer=="paper"):
+                ans.config(text="You Win \nYou Choose Scissor\tComputer Choose Paper")
+                emoji.config(text="     \U0001F929	")
+            elif(event.widget==srbtn and computer=="Rock"):
+                ans.config(text="You Loose \nYou Choose Scissor\tComputer Choose Rock")
+                emoji.config(text="     \U0001F614	")
+                
+        rockbtn=Button(f1,text="Rock",bg="#ff0066",font=("Big Space",30),relief="sunken")
+        rockbtn.bind('<ButtonPress>',game)
+        rockbtn.grid(row=0,column=0,padx=55,pady=20)
+
+        paperbtn=Button(f1,text="Paper",bg="#ff0066",font=("Big Space",30),relief="sunken")
+        paperbtn.bind('<ButtonPress>',game)
+        paperbtn.grid(row=0,column=2,padx=55)
+
+        srbtn=Button(f1,text="Scissors",bg="#ff0066",font=("Big Space",30),relief="sunken")
+        srbtn.bind('<ButtonPress>',game)
+        srbtn.grid(row=0,column=4,padx=55)
+
+        ans=Label(root,text="Your Answer",bg="#9966ff",font=("Big Space",25),relief="solid")
+        ans.place(x=360,y=360,anchor=CENTER)
+        emoji=Label(root,text="     \U0001F600	",bg="#9966ff",font=("Big Space",25),relief="solid")
+        emoji.place(x=360,y=450,anchor=CENTER)
+        
+
+root=Tk()
+ob1=rock(root)
+root.mainloop()
