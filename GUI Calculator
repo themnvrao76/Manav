@@ -1,0 +1,103 @@
+from tkinter import *
+
+class cal:
+    def __init__(self,root):
+        global data
+        self.root=root
+        self.root.geometry("320x480")
+        self.root.title("Calculator")
+        f1=LabelFrame(root,bg="White")
+        f1.place(x=0,y=105,relwidth=1)
+        def calcu(event):
+            text=event.widget.cget("text")
+            area.get()
+            if event.widget=='<Return>':
+                data.set(eval(data.get()))
+
+            if text=="=":
+                data.set(eval(data.get()))
+            elif text=="C":
+                data.set("")
+            else:
+                data.set(data.get()+text)
+                
+            
+        seven=Button(f1,text="7",bg="white",font=("Arial",30,"bold"))
+        seven.bind('<Button-1>',calcu)
+        seven.grid(row=0,column=0,padx=10)
+        
+        eight=Button(f1,text="8",bg="white",font=("Arial",30,"bold"))
+        eight.bind('<Button-1>',calcu)
+        eight.grid(row=0,column=1,padx=10)
+
+        nine=Button(f1,text="9",bg="white",font=("Arial",30,"bold"))
+        nine.bind('<Button-1>',calcu)
+        nine.grid(row=0,column=2,padx=10)
+
+        multi=Button(f1,text="*",bg="white",font=("Arial",30,"bold"))
+        multi.bind('<Button-1>',calcu)
+        multi.grid(row=0,column=3,padx=10)
+
+        four=Button(f1,text="4",bg="white",font=("Arial",30,"bold"))
+        four.bind('<Button-1>',calcu)
+        four.grid(row=1,column=0,padx=10)
+
+        five=Button(f1,text="5",bg="white",font=("Arial",30,"bold"))
+        five.bind('<Button-1>',calcu)
+        five.grid(row=1,column=1,padx=10)
+
+        six=Button(f1,text="6",bg="white",font=("Arial",30,"bold"))
+        six.bind('<Button-1>',calcu)
+        six.grid(row=1,column=2,padx=10)
+
+        div=Button(f1,text="/",bg="white",font=("Arial",32,"bold"))
+        div.bind('<Button-1>',calcu)
+        div.grid(row=1,column=3,padx=10)
+
+        one=Button(f1,text="1",bg="white",font=("Arial",30,"bold"))
+        one.bind('<Button-1>',calcu)
+        one.grid(row=2,column=0,padx=10)
+
+        two=Button(f1,text="2",bg="white",font=("Arial",30,"bold"))
+        two.bind('<Button-1>',calcu)
+        two.grid(row=2,column=1,padx=10)
+
+        three=Button(f1,text="3",bg="white",font=("Arial",30,"bold"))
+        three.bind('<Button-1>',calcu)
+        three.grid(row=2,column=2,padx=10)
+
+        sub=Button(f1,text="-",bg="white",font=("Arial",35,"bold"))
+        sub.bind('<Button-1>',calcu)
+        sub.grid(row=2,column=3,padx=10)
+        zero=Button(f1,text="0",bg="white",font=("Arial",30,"bold"))
+        zero.bind('<Button-1>',calcu)
+        zero.grid(row=3,column=0,padx=10)
+
+        point=Button(f1,text=".",bg="white",font=("Arial",32,"bold"))
+        point.bind('<Button-1>',calcu)
+        point.grid(row=3,column=1,padx=10)
+
+        plus=Button(f1,text="+",bg="white",font=("Arial",30,"bold"))
+        plus.bind('<Button-1>',calcu)
+        plus.grid(row=3,column=2,padx=10)
+
+        eql=Button(f1,text="=",bg="white",font=("Arial",30,"bold"))
+        eql.bind('<Return>',calcu)
+        eql.bind('<Button-1>',calcu)
+        eql.grid(row=3,column=3,padx=10)
+
+        data=StringVar()
+        data.set("")
+        area=Entry(root,text=data,width=55,font=("Arial",55),relief="raised")
+        clear=Button(root,text="C",bg="white",font=("Arial",10,"bold"))
+        clear.bind('<Button-1>',calcu)
+        clear.place(x=270,y=75)
+        area.pack()
+        
+
+
+
+
+root=Tk()
+ob1=cal(root)
+root.mainloop()
