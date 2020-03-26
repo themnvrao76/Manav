@@ -1,0 +1,53 @@
+from tkinter import *
+from pprint import pprint
+import requests
+import time
+
+# data=requests.get(url="https://corona.lmao.ninja/all")
+# live=data.json()
+# print(live['cases'])
+# print(live['deaths'])
+# print(live['recovered'])
+
+class mygui:
+  def __init__(self,root):
+    self.root=root
+    self.root.geometry("480x480")
+    self.root.title("COVID LIVE UPDATE")
+    d=Label(root,text="Total Cases",font=("arial",20,"bold"))
+    d.pack()
+  def live(self,url):
+    data=requests.get(url="https://corona.lmao.ninja/all")
+    live=data.json()
+    deathdata=Label(root,text=live['cases'],font=("arial",45,"bold"))
+    deathdata.pack()
+
+    cases=Label(root,text="Total Deaths",font=("arial",20,"bold"))
+    cases.pack()
+
+    deathcases=Label(root,text=live['deaths'],font=("arial",45,"bold"))
+    deathcases.pack()
+
+    recvr=Label(root,text="Total Recovered",font=("arial",20,"bold"))
+    recvr.pack()
+    
+    recvrcase=Label(root,text=live['recovered'],font=("arial",45,"bold"))
+    recvrcase.pack()
+    
+    
+    
+    
+    
+
+
+root=Tk()
+ob1=mygui(root)
+ob1.live(url="https://corona.lmao.ninja/all")
+root.mainloop()
+
+  
+  
+
+  
+
+
