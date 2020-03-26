@@ -1,0 +1,104 @@
+from tkinter import *
+import requests
+
+class covid:
+    def __init__(self,root):
+        self.root=root
+        self.root.geometry("720x720")
+        self.root.minsize(720,720)
+        self.root.maxsize(720,720)
+        self.root.title("LIVE COVID19")
+        self.root.configure(bg="White")
+        title=Label(root,text="Live Corona Update",font=("Open Sans",30),fg="White",bg="#cc66ff",relief="solid")
+        title.pack(pady=20,fill=X)
+        besafe=Label(root,text="Be Safe ",font=("Open Sans",30),fg="White",bg="#cc66ff",relief="solid",borderwidth=2)
+        besafe.pack(pady=2,fill=X,side="bottom")
+        data=Label(root,text="Enter Country Name",font=("Open Sans",20),bg="White")
+        data.pack()
+        def getdata(event):
+            try:
+                data=requests.get(url=f"https://corona.lmao.ninja/countries/{mytext.get()}")
+                
+                live=data.json()
+                
+                if(event.widget==databutton):
+                    mycountry.configure(text=live['country'])
+                    mycases.configure(text=live['cases'])
+                    mydeaths.configure(text=live['deaths'])
+                    myrecovered.configure(text=live['recovered'])
+                    mytodayDeaths.configure(text=live['todayDeaths'])
+
+                   
+
+                    country.configure(text="Country :")
+                    cases.configure(text="Cases   :")
+                    deaths.configure(text="Deaths  :")
+                    recovered.configure(text="Recovered  :")
+                    todayDeaths.configure(text="TodayDeaths  :")
+
+                    notice.configure(text="")
+
+            except:
+                notice.configure(text="Please Enter Valid Country")
+
+                mycountry.configure(text="")
+                mycases.configure(text="")
+                mydeaths.configure(text="")
+                myrecovered.configure(text="")
+                mytodayDeaths.configure(text="")
+
+                country.configure(text="")
+                cases.configure(text="")
+                deaths.configure(text="")
+                recovered.configure(text="")
+                todayDeaths.configure(text="")
+            
+        mytext=StringVar()
+        dataentry=Entry(root,text=mytext,font=("Open Sans",20),relief="solid")
+        dataentry.pack(pady=15)
+        databutton=Button(root,text="Search",font=("Open Sans",20),bg="#cc66ff",fg="White",relief="groove")
+        databutton.bind('<Button-1>',getdata)
+        databutton.pack()
+    
+        country=Label(root,text="",font=("Open Sans",20,"bold"),bg="White")
+        country.place(x=30,y=330)
+        cases=Label(root,text="",font=("Open Sans",20,"bold"),bg="White")
+        cases.place(x=30,y=380)
+        deaths=Label(root,text="",font=("Open Sans",20,"bold"),bg="White")
+        deaths.place(x=30,y=430)
+        recovered=Label(root,text="",font=("Open Sans",20,"bold"),bg="White")
+        recovered.place(x=30,y=480)
+        todayDeaths=Label(root,text="",font=("Open Sans",20,"bold"),bg="White")
+        todayDeaths.place(x=30,y=530)
+
+        mycountry=Label(root,text="",font=("Open Sans",20,"bold"),bg="White")
+        mycountry.place(x=250,y=330)
+
+        mycases=Label(root,text="",font=("Open Sans",20,"bold"),bg="White")
+        mycases.place(x=250,y=380)
+
+        mydeaths=Label(root,text="",font=("Open Sans",20,"bold"),bg="White")
+        mydeaths.place(x=250,y=430)
+
+        myrecovered=Label(root,text="",font=("Open Sans",20,"bold"),bg="White")
+        myrecovered.place(x=250,y=480)
+
+        mytodayDeaths=Label(root,text="",font=("Open Sans",20,"bold"),bg="White")
+        mytodayDeaths.place(x=250,y=530)
+
+        notice=Label(root,text="",font=("Open Sans",20,"bold"),fg="black",bg="White")
+        notice.place(x=180,y=300)
+
+        total=Label(root,text="Total Cases",font=("Open Sans",15,"bold"),fg="black",bg="White")
+        total.place(x=550,y=550)
+
+        totaldata=requests.get(url="https://corona.lmao.ninja/all")
+        totald=totaldata.json()
+        mytotal=Label(root,text=totald['cases'],font=("Open Sans",15,"bold"),fg="black",bg="White")
+        mytotal.place(x=550,y=590)
+        
+
+
+root=Tk()
+ob1=covid(root)
+root.mainloop()
