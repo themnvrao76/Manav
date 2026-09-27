@@ -1,0 +1,128 @@
+---
+layout: default
+title: Tensor Room
+description: "Private-feeling local writing console for manavbarot.com."
+noindex: true
+---
+<section class="tensor-shell">
+  <header class="tensor-head">
+    <div>
+      <div class="eyebrow">LOCAL COMPOSER / UNLISTED</div>
+      <h1>Tensor<br><span class="gradient-text">Room.</span></h1>
+    </div>
+    <div class="tensor-badge">NO TOKENS · NO SERVER SECRETS</div>
+  </header>
+
+  <div class="composer">
+    <section class="composer-panel">
+      <div class="field">
+        <label for="postTitle">Title</label>
+        <input id="postTitle" autocomplete="off" placeholder="Understanding JEPA from first principles">
+      </div>
+      <div class="field">
+        <label for="postDescription">Description</label>
+        <input id="postDescription" autocomplete="off" placeholder="A practical research note on...">
+      </div>
+      <div class="field">
+        <label for="postTags">Tags · comma separated</label>
+        <input id="postTags" autocomplete="off" placeholder="JEPA, self-supervised learning, world models">
+      </div>
+      <div class="field">
+        <label for="postBody">Markdown</label>
+        <textarea id="postBody" spellcheck="true" placeholder="# Start writing..."></textarea>
+      </div>
+      <div class="composer-actions">
+        <button class="button primary" id="copyPost">COPY POST</button>
+        <button class="button ghost" id="downloadPost">DOWNLOAD .MD</button>
+        <a class="button ghost" href="https://github.com/themnvrao76/Manav/tree/master/_posts" target="_blank" rel="noreferrer">OPEN _POSTS ↗</a>
+      </div>
+      <p class="muted mono" style="font-size:9px;margin-top:18px">Drafts are stored only in this browser's localStorage. Publishing still happens through GitHub or by asking ChatGPT to publish the article.</p>
+    </section>
+
+    <section class="composer-panel composer-preview">
+      <div class="eyebrow">LIVE PREVIEW</div>
+      <article class="preview-sheet prose" id="preview">
+        <div class="eyebrow" id="previewDate"></div>
+        <h2 id="previewTitle">Untitled research note</h2>
+        <p id="previewDescription">Your description will appear here.</p>
+        <div id="previewBody"></div>
+      </article>
+    </section>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const fields = {
+    title: $("postTitle"),
+    description: $("postDescription"),
+    tags: $("postTags"),
+    body: $("postBody")
+  };
+  const key = "manav.tensor-room.draft.v1";
+  const today = new Date();
+  const iso = today.toISOString().slice(0,10);
+  $("previewDate").textContent = iso.replaceAll("-", ".");
+
+  const slugify = (s) => s.toLowerCase().trim()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
+
+  const esc = (s) => String(s || "").replaceAll('"', '\\"');
+
+  const buildPost = () => {
+    const tags = fields.tags.value.split(",").map(x => x.trim()).filter(Boolean);
+    const front = [
+      "---",
+      'title: "' + esc(fields.title.value || "Untitled") + '"',
+      'description: "' + esc(fields.description.value || "") + '"',
+      "date: " + iso,
+      "tags: [" + tags.map(t => '"' + esc(t) + '"').join(", ") + "]",
+      "---",
+      "",
+      fields.body.value || ""
+    ];
+    return front.join("\n");
+  };
+
+  const render = () => {
+    $("previewTitle").textContent = fields.title.value || "Untitled research note";
+    $("previewDescription").textContent = fields.description.value || "Your description will appear here.";
+    $("previewBody").innerHTML = window.marked ? marked.parse(fields.body.value || "*Start writing in the editor.*") : "";
+    localStorage.setItem(key, JSON.stringify({
+      title: fields.title.value,
+      description: fields.description.value,
+      tags: fields.tags.value,
+      body: fields.body.value
+    }));
+  };
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(key) || "{}");
+    Object.keys(fields).forEach(k => { if (saved[k]) fields[k].value = saved[k]; });
+  } catch (_) {}
+
+  Object.values(fields).forEach(el => el.addEventListener("input", render));
+
+  $("copyPost").addEventListener("click", async () => {
+    await navigator.clipboard.writeText(buildPost());
+    $("copyPost").textContent = "COPIED ✓";
+    setTimeout(() => $("copyPost").textContent = "COPY POST", 1200);
+  });
+
+  $("downloadPost").addEventListener("click", () => {
+    const slug = slugify(fields.title.value || "untitled");
+    const blob = new Blob([buildPost()], { type: "text/markdown;charset=utf-8" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = iso + "-" + slug + ".md";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 500);
+  });
+
+  render();
+})();
+</script>
