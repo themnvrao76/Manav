@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
+Disallow: /tensor-room/
 Sitemap: https://manavbarot.com/sitemap.xml
