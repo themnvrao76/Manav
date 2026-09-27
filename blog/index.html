@@ -1,0 +1,27 @@
+---
+layout: default
+title: Blog
+description: "Technical notes by Manav Barot on multimodal AI, vision-language models, computer vision, research papers, and implementation."
+---
+<section class="page-hero container reveal">
+  <div class="eyebrow">Blog / Research notebook</div>
+  <h1>Notes from the <span class="gradient-text">workbench.</span></h1>
+  <p>Technical writing on multimodal AI, vision-language models, computer vision, model implementation, papers, and research engineering.</p>
+</section>
+
+<section class="blog-list container">
+  {% if site.posts.size > 0 %}
+    {% for post in site.posts %}
+      <a class="blog-row reveal" href="{{ post.url }}">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        <div><h2>{{ post.title }}</h2><p>{{ post.description | default: post.excerpt | strip_html | truncate: 180 }}</p></div>
+        <span class="arrow">→</span>
+      </a>
+    {% endfor %}
+  {% else %}
+    <div class="empty-state reveal">
+      <strong>The notebook is ready.</strong>
+      The first article has not been published yet. New posts can be added as Markdown files in <span class="mono">_posts/</span> and GitHub Pages will publish them automatically.
+    </div>
+  {% endif %}
+</section>
