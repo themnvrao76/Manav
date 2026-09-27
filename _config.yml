@@ -1,0 +1,19 @@
+title: "Manav Barot"
+description: "Ph.D. candidate working on multimodal AI, vision-language models, computer vision, and 3D human understanding."
+url: "https://manavbarot.com"
+baseurl: ""
+markdown: kramdown
+permalink: /blog/:title/
+timezone: America/Chicago
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      author: "Manav Barot"
+
+exclude:
+  - README.md
+  - BLOGGING.md
