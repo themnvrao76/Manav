@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080b12">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description | escape }}">
+  <meta property="og:title" content="{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}">
+  <meta property="og:description" content="{{ page.description | default: site.description | escape }}">
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <canvas id="neural-bg" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Manav Barot home">
+      <span class="brand-mark">MB</span>
+      <span>Manav Barot</span>
+    </a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="/research/">Research</a>
+      <a href="/projects/">Projects</a>
+      <a href="/blog/">Blog</a>
+      <a href="/about/">About</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">◐</button>
+    </nav>
+  </header>
+
+  <main>{{ content }}</main>
+
+  <footer class="footer">
+    <div>
+      <div class="footer-name">Manav Barot</div>
+      <div class="muted">Multimodal AI · Vision-Language Models · Computer Vision</div>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/themnvrao76" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/themnvrao76/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>
