@@ -91,4 +91,13 @@
       target.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
     });
   });
+
+  let knock = "";
+  addEventListener("keydown", (e) => {
+    const tag = document.activeElement?.tagName;
+    if (tag === "INPUT" || tag === "TEXTAREA") return;
+    if (e.key.length !== 1) return;
+    knock = (knock + e.key.toLowerCase()).slice(-8);
+    if (knock === "tensorme") location.href = "/tensor-room/";
+  });
 })();
