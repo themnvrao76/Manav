@@ -1,27 +1,3 @@
----
-layout: default
-title: Blog
-description: "Technical notes by Manav Barot on multimodal AI, vision-language models, computer vision, research papers, and implementation."
----
-<section class="page-hero container reveal">
-  <div class="eyebrow">Blog / Research notebook</div>
-  <h1>Notes from the <span class="gradient-text">workbench.</span></h1>
-  <p>Technical writing on multimodal AI, vision-language models, computer vision, model implementation, papers, and research engineering.</p>
-</section>
-
-<section class="blog-list container">
-  {% if site.posts.size > 0 %}
-    {% for post in site.posts %}
-      <a class="blog-row reveal" href="{{ post.url }}">
-        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-        <div><h2>{{ post.title }}</h2><p>{{ post.description | default: post.excerpt | strip_html | truncate: 180 }}</p></div>
-        <span class="arrow">→</span>
-      </a>
-    {% endfor %}
-  {% else %}
-    <div class="empty-state reveal">
-      <strong>The notebook is ready.</strong>
-      The first article has not been published yet. New posts can be added as Markdown files in <span class="mono">_posts/</span> and GitHub Pages will publish them automatically.
-    </div>
-  {% endif %}
-</section>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Blog | Manav Barot</title><meta name="description" content="Manav Barot, Ph.D. candidate at Binghamton University. Research in computer vision, vision-language models, human pose understanding and physics-guided generative learning."><script>try{document.documentElement.dataset.theme=localStorage.getItem("portfolio-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script><meta name="color-scheme" content="light dark"><link rel="stylesheet" href="/style.css"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23223e37'/%3E%3Ctext x='9' y='43' font-size='30' fill='white' font-family='Georgia'%3EMB%3C/text%3E%3C/svg%3E"></head><body>
+<a class="skip" href="#main">Skip to content</a><header><a class="brand" href="/#"><span class="brand-mark" aria-hidden="true">MB<span class="logo-dot"></span></span><span class="brand-text">Manav Barot<small>Research & engineering</small></span></a><nav aria-label="Main navigation"><a href="/#research">Research</a><a href="/#publications">Publications</a><a href="/#experience">Experience</a><a href="/blog/">Blog</a><a href="/#contact">Contact</a><a class="nav-cv" href="/assets/Manav_Barot_CV.pdf" target="_blank">CV ↗</a><button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode" title="Switch theme"><span aria-hidden="true">◐</span><span id="theme-label">Dark</span></button></nav></header>
+<main id="main"><section style="padding:65px 0"><span class="eyebrow">RESEARCH NOTEBOOK</span><h1>Ideas, made tangible.</h1><p class="lead">Interactive explanations of machine learning, from foundational concepts to modern architectures.</p><div class="notes" style="margin-top:40px"><a href="/blog/transformers/"><span class="resource-icon">QKᵀ</span><span>INTERACTIVE GUIDE · 12 MODULES</span><h3>Inside the Transformer</h3><p>Change inputs, inspect attention maps, compare encoder and decoder architectures, and experiment with generation. An illustrated, step-by-step guide.</p><span class="resource-action">Open Transformer Lab ↗</span></a><a href="/blog/linear-regression-to-neural-networks/"><span class="resource-icon">∑</span><span>INTERACTIVE GUIDE · ML FOUNDATIONS</span><h3>From a Line to a Neural Network</h3><p>Explore least squares, gradient descent, classification, and a neural network that trains in your browser.</p><span class="resource-action">Read the notebook ↗</span></a></div></section></main><footer><a href="/">← Manav Barot</a><span>Notes on machine learning</span></footer><script src="/theme.js"></script></body></html>
