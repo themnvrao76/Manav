@@ -19,3 +19,6 @@ html[data-theme=dark] .portrait,html[data-theme=dark] .social a,html[data-theme=
 @media(prefers-reduced-motion:reduce){.notes>a{transition:none}}
 
 .notes{grid-template-columns:repeat(2,minmax(0,1fr))}@media(max-width:600px){.notes{grid-template-columns:1fr}}
+
+
+.notes{grid-template-columns:repeat(3,minmax(0,1fr))}@media(max-width:600px){.notes{grid-template-columns:1fr}}
